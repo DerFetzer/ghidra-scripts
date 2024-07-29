@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ghidra-scripts"
+version = "0.1.0"
+description = ""
+authors = ["DerFetzer <kontakt@der-fetzer.de>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ghidra-stubs = "^11.1.2.1.0.4"
+
+[tool.basedpyright]
+typeCheckingMode = "off"
+
+[tool.ruff.lint]
+ignore = ["F405"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

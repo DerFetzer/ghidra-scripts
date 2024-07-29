@@ -1,0 +1,28 @@
+<callfixup name="icase">
+<target name="?C?ICASE"/>
+<pcode>
+<body><![CDATA[
+    highaddr:2 = inst_next;
+
+    <next>
+    lowaddr:2 = highaddr + 1;
+    currjmp:2 = *highaddr << 8 | *lowaddr;
+    if (currjmp == 0) goto <default>;
+
+    valueaddr_h = highaddr + 2;
+    valueaddr_l = highaddr + 3;
+    if (ACC == *valueaddr_h && B == *valueaddr_l) goto <found>;
+
+    highaddr = highaddr + 4;
+    goto <next>;
+
+    <default>
+    highaddr = highaddr + 2;
+    pc:2 = *highaddr;
+    goto [pc];
+
+    <found>
+    goto [currjmp];
+]]></body>
+</pcode>
+</callfixup>

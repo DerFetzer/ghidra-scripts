@@ -1,0 +1,27 @@
+<callfixup name="ccase">
+<target name="?C?CCASE"/>
+<pcode>
+<body><![CDATA[
+    highaddr:2 = inst_next;
+
+    <next>
+    lowaddr:2 = highaddr + 1;
+    currjmp:2 = *highaddr << 8 | *lowaddr;
+    if (currjmp == 0) goto <default>;
+
+    valueaddr = highaddr + 2;
+    if (ACC == *valueaddr) goto <found>;
+
+    highaddr = highaddr + 3;
+    goto <next>;
+
+    <default>
+    highaddr = highaddr + 2;
+    pc:2 = *highaddr;
+    goto [pc];
+
+    <found>
+    goto [currjmp];
+]]></body>
+</pcode>
+</callfixup>
